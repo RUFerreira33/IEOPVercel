@@ -39,7 +39,7 @@ router.post("/", async (req, res) => {
     const baseUrl = getEnvOrFail(res, "VENDUS_BASE_URL");
     if (!baseUrl) return;
 
-    const token = getEnvOrFail(res, "VENDUS_API_TOKEN");
+    const token = getEnvOrFail(res, "VENDUS_API_KEY");
     if (!token) return;
 
     // Permite troca fácil do endpoint de criação sem mexer no código
@@ -155,7 +155,9 @@ router.post("/", async (req, res) => {
     return res.json({
       ok: true,
       orderId,
-      details: orderData
+      customerId: customerId,
+      total,
+      status: "ORDER_CREATED"
     });
   } catch (err) {
     console.error("Erro /orders:", err);
@@ -172,7 +174,7 @@ router.get("/", async (req, res) => {
     const baseUrl = getEnvOrFail(res, "VENDUS_BASE_URL");
     if (!baseUrl) return;
 
-    const token = getEnvOrFail(res, "VENDUS_API_TOKEN");
+    const token = getEnvOrFail(res, "VENDUS_API_KEY");
     if (!token) return;
 
     const { customerId } = req.query;
