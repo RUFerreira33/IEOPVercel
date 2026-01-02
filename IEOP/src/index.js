@@ -22,17 +22,17 @@ app.use(
 );
 
 // Público
-app.get("/api/health", (req, res) => {
+app.get("/health", (req, res) => {
   res.json({ ok: true, status: "API a funcionar" });
 });
 
 // Protegido (PowerApps/cliente interno)
-app.use("/api", requireInternalKey);
+app.use(requireInternalKey);
 
-app.use("/api/products", productsRoutes);
-app.use("/api/orders", ordersRoutes);
-app.use("/api/documents", documentsRoutes);
-app.use("/api/customers", customersRoutes);
+app.use("/products", productsRoutes);
+app.use("/orders", ordersRoutes);
+app.use("/documents", documentsRoutes);
+app.use("/customers", customersRoutes);
 
 if (process.env.VERCEL !== "1") {
   const PORT = process.env.PORT || 5000;
