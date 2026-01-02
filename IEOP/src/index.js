@@ -6,6 +6,7 @@ import { requireInternalKey } from "./middleware/auth.middleware.js";
 import productsRoutes from "./routes/products.routes.js";
 import ordersRoutes from "./routes/orders.routes.js";
 import documentsRoutes from "./routes/documents.routes.js";
+import customersRoutes from "./routes/customers.routes.js";
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ app.use(requireInternalKey);
 app.use("/products", productsRoutes);
 app.use("/orders", ordersRoutes);
 app.use("/documents", documentsRoutes);
+app.use("/customers", customersRoutes);
 
 if (process.env.VERCEL !== "1") {
   const PORT = process.env.PORT || 5000;
