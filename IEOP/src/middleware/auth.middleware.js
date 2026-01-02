@@ -1,6 +1,13 @@
-
 export function requireInternalKey(req, res, next) {
   try {
+    // 🔓 Permitir acesso público ao health
+    if (
+      req.path === "/health" ||
+      req.originalUrl.includes("/health")
+    ) {
+      return next();
+    }
+
     const expectedKey = process.env.INTERNAL_API_KEY;
     const providedKey = req.headers["x-api-key"];
 
